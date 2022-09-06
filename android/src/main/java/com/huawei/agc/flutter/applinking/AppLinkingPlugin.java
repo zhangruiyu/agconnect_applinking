@@ -21,7 +21,6 @@ import android.app.Activity;
 import androidx.annotation.NonNull;
 
 import com.huawei.agc.flutter.applinking.handlers.AppLinkingMethodCallHandler;
-import com.huawei.agc.flutter.applinking.handlers.AppLinkingStreamHandler;
 import com.huawei.agc.flutter.applinking.services.AppLinkingViewModel;
 import com.huawei.agconnect.AGConnectInstance;
 
@@ -31,20 +30,18 @@ import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodChannel;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 public class AppLinkingPlugin implements FlutterPlugin, ActivityAware {
     private MethodChannel methodChannel;
     private MethodChannel.MethodCallHandler methodCallHandler;
     private AppLinkingViewModel appLinkingViewModel;
     private EventChannel eventChannel;
-    private EventChannel.StreamHandler streamHandler;
     private FlutterPluginBinding flutterPluginBinding;
 
     private void onAttachedToEngine(final BinaryMessenger messenger, final Activity activity) {
-//        if (AGConnectInstance.getInstance() == null) {
-//            AGConnectInstance.initialize(activity.getApplicationContext());
-//        }
+        if (AGConnectInstance.getInstance() == null) {
+            AGConnectInstance.initialize(activity.getApplicationContext());
+        }
         initializeChannels(messenger);
         setHandlers(activity);
     }
@@ -58,8 +55,6 @@ public class AppLinkingPlugin implements FlutterPlugin, ActivityAware {
         appLinkingViewModel = new AppLinkingViewModel();
         methodCallHandler = new AppLinkingMethodCallHandler(appLinkingViewModel);
         methodChannel.setMethodCallHandler(methodCallHandler);
-        streamHandler = new AppLinkingStreamHandler(activity);
-        eventChannel.setStreamHandler(streamHandler);
     }
 
     @Override
@@ -97,7 +92,6 @@ public class AppLinkingPlugin implements FlutterPlugin, ActivityAware {
     }
 
     private void removeChannels() {
-        streamHandler = null;
         methodCallHandler = null;
         appLinkingViewModel = null;
         methodChannel = null;
