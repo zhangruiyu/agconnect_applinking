@@ -53,7 +53,7 @@ public class AppLinkingPlugin implements FlutterPlugin, ActivityAware {
 
     private void setHandlers(Activity activity) {
         appLinkingViewModel = new AppLinkingViewModel();
-        methodCallHandler = new AppLinkingMethodCallHandler(appLinkingViewModel);
+        methodCallHandler = new AppLinkingMethodCallHandler(appLinkingViewModel,activity);
         methodChannel.setMethodCallHandler(methodCallHandler);
     }
 

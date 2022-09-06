@@ -16,10 +16,13 @@
 
 package com.huawei.agc.flutter.applinking.handlers;
 
+import android.app.Activity;
+
 import androidx.annotation.NonNull;
 
 import com.huawei.agc.flutter.applinking.constants.Method;
 import com.huawei.agc.flutter.applinking.services.AppLinkingViewModel;
+import com.huawei.agconnect.AGConnectInstance;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -27,13 +30,18 @@ import io.flutter.plugin.common.MethodChannel.Result;
 
 public class AppLinkingMethodCallHandler implements MethodCallHandler {
     private final AppLinkingViewModel appLinkingViewModel;
+    private final Activity activity;
 
-    public AppLinkingMethodCallHandler(AppLinkingViewModel service) {
+    public AppLinkingMethodCallHandler(AppLinkingViewModel service, Activity activity) {
         this.appLinkingViewModel = service;
+        this.activity = activity;
     }
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
+        if (AGConnectInstance.getInstance() == null) {
+            AGConnectInstance.initialize(activity.getApplicationContext());
+        }
         appLinkingViewModel.setCall(call);
         appLinkingViewModel.setResult(result);
         switch (call.method) {
