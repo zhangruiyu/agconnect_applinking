@@ -1,7 +1,7 @@
 name: agconnect_applinking_plus
 description: AGC App Linking Kit plugin for Flutter.This Kit allows you to create cross-platform links that can work
   as defined regardless of whether your app has been installed by a user.
-version: 2.0.0
+version: 3.0.0
 homepage: https://developer.huawei.com/consumer/en/agconnect/
 
 environment:
