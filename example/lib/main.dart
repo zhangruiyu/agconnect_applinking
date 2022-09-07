@@ -16,12 +16,12 @@
 
 import 'dart:async';
 
-import 'package:agconnect_applinking/agconnect_applinking.dart';
-import 'package:agconnect_applinking/constants/app_linking.dart';
-import 'package:agconnect_applinking/models/app_linking_parameters.dart';
-import 'package:agconnect_applinking/models/long_app_linking.dart';
-import 'package:agconnect_applinking/models/resolved_link_data.dart';
-import 'package:agconnect_applinking/models/short_app_linking.dart';
+import 'package:agconnect_applinking_plus/agconnect_applinking.dart';
+import 'package:agconnect_applinking_plus/constants/app_linking.dart';
+import 'package:agconnect_applinking_plus/models/app_linking_parameters.dart';
+import 'package:agconnect_applinking_plus/models/long_app_linking.dart';
+import 'package:agconnect_applinking_plus/models/resolved_link_data.dart';
+import 'package:agconnect_applinking_plus/models/short_app_linking.dart';
 import 'package:agconnect_applinking_example/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

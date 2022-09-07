@@ -21,7 +21,7 @@ import android.app.Activity;
 import androidx.annotation.NonNull;
 
 import com.huawei.agc.flutter.applinking.handlers.AppLinkingMethodCallHandler;
-import com.huawei.agc.flutter.applinking.services.AppLinkingViewModel;
+import com.huawei.agc.flutter.applinking.viewModel.AppLinkingViewModel;
 import com.huawei.agconnect.AGConnectInstance;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;

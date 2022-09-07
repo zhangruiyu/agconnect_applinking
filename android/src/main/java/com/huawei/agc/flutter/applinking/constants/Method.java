@@ -19,6 +19,7 @@ package com.huawei.agc.flutter.applinking.constants;
 public class Method {
     public static final String BUILD_SHORT_APP_LINKING = "buildShortAppLinking";
     public static final String BUILD_APP_LINKING = "buildLongAppLinking";
+    public static final String Get_App_Linking = "GetAppLinking";
 
     private Method() {
     }

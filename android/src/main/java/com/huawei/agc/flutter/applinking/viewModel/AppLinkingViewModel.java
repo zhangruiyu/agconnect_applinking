@@ -14,17 +14,21 @@
     limitations under the License.
 */
 
-package com.huawei.agc.flutter.applinking.services;
+package com.huawei.agc.flutter.applinking.viewModel;
 
+
+import android.app.Activity;
 import android.net.Uri;
 
 import com.huawei.agc.flutter.applinking.utils.Utils;
 import com.huawei.agc.flutter.applinking.utils.ValueGetter;
+import com.huawei.agconnect.applinking.AGConnectAppLinking;
 import com.huawei.agconnect.applinking.AppLinking;
 import com.huawei.agconnect.applinking.ShortAppLinking;
 import com.huawei.agconnect.applinking.ShortAppLinking.LENGTH;
 import com.huawei.agconnect.exception.AGCException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import io.flutter.Log;
@@ -113,9 +117,9 @@ public class AppLinkingViewModel {
         }
         if (map.get("androidOpenType") != null) {
             builder.setOpenType(
-                AppLinking.AndroidLinkInfo.AndroidOpenType.valueOf(ValueGetter.getString("androidOpenType", map)));
+                    AppLinking.AndroidLinkInfo.AndroidOpenType.valueOf(ValueGetter.getString("androidOpenType", map)));
             if ("CustomUrl".equals(ValueGetter.getString("androidOpenType", map))
-                && map.get("androidFallbackUrl") != null) {
+                    && map.get("androidFallbackUrl") != null) {
                 builder.setFallbackUrl(ValueGetter.getString("androidFallbackUrl", map));
             }
         }
@@ -165,7 +169,8 @@ public class AppLinkingViewModel {
         final AppLinking.Builder builder = AppLinking.newBuilder();
 
         if (call.argument("deepLink") != null) {
-            builder.setDeepLink(Uri.parse(call.argument("deepLink")));;
+            builder.setDeepLink(Uri.parse(call.argument("deepLink")));
+            ;
         }
         if (call.argument("domainUriPrefix") != null) {
             builder.setUriPrefix(call.argument("domainUriPrefix"));
@@ -184,7 +189,7 @@ public class AppLinkingViewModel {
         }
         if (call.argument("iosLinkInfo") != null) {
             builder.setIOSLinkInfo(createIOSLinkInfo(call.<Map<String, Object>>argument("iosLinkInfo"),
-                call.<Map<String, Object>>argument("iTunesLinkInfo")));
+                    call.<Map<String, Object>>argument("iTunesLinkInfo")));
         }
 
         if (call.argument("expireMinute") != null) {
@@ -194,5 +199,23 @@ public class AppLinkingViewModel {
             builder.setPreviewType(AppLinking.LinkingPreviewType.valueOf(call.argument("linkingPreviewType")));
         }
         return builder;
+    }
+
+    public void getAppLinking(Activity activity) {
+        AGConnectAppLinking.getInstance().getAppLinking(activity).addOnSuccessListener(resolvedLinkData -> {
+            try {
+                result.success(Utils.fromResolvedLinkDataToMap(resolvedLinkData));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).addOnFailureListener(e -> {
+            try {
+                e.printStackTrace();
+                Log.e("getAppLinking", "错误了${e.localizedMessage}");
+                result.success(new HashMap<String, Object>());
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
     }
 }

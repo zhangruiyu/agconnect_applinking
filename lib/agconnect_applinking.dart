@@ -45,6 +45,11 @@ class AGCAppLinking {
     return appLinking;
   }
 
+  Future<dynamic> getAppLinking() async {
+    return ResolvedLinkData.fromMap(
+        (await _channel.invokeMapMethod<String, dynamic>("getAppLinking")));
+  }
+
   Stream<ResolvedLinkData> get onResolvedData {
     if (_onResolvedLinkData == null) {
       _onResolvedLinkData = _eventChannel

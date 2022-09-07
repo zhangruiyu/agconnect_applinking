@@ -2,6 +2,10 @@
 
 ---
 
+## 说明
+
+由于华为的flutter插件及其不爱维护,而且不更新,所以自己fork了个,会尽可能保证更新
+
 ## Contents
 
   - [1. Introduction](#1-introduction)

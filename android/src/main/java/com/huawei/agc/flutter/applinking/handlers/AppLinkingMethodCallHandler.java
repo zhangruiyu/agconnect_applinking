@@ -21,7 +21,7 @@ import android.app.Activity;
 import androidx.annotation.NonNull;
 
 import com.huawei.agc.flutter.applinking.constants.Method;
-import com.huawei.agc.flutter.applinking.services.AppLinkingViewModel;
+import com.huawei.agc.flutter.applinking.viewModel.AppLinkingViewModel;
 import com.huawei.agconnect.AGConnectInstance;
 
 import io.flutter.plugin.common.MethodCall;
@@ -50,6 +50,9 @@ public class AppLinkingMethodCallHandler implements MethodCallHandler {
                 break;
             case Method.BUILD_SHORT_APP_LINKING:
                 appLinkingViewModel.buildShortAppLinking();
+                break;
+            case Method.Get_App_Linking:
+                appLinkingViewModel.getAppLinking(activity);
                 break;
             default:
                 result.notImplemented();
