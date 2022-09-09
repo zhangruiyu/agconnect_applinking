@@ -20,6 +20,7 @@ package com.huawei.agc.flutter.applinking.viewModel;
 import android.app.Activity;
 import android.net.Uri;
 
+import com.huawei.agc.flutter.applinking.utils.ReplyHandler;
 import com.huawei.agc.flutter.applinking.utils.Utils;
 import com.huawei.agc.flutter.applinking.utils.ValueGetter;
 import com.huawei.agconnect.applinking.AGConnectAppLinking;
@@ -33,45 +34,39 @@ import java.util.Map;
 
 import io.flutter.Log;
 import io.flutter.plugin.common.MethodCall;
-import io.flutter.plugin.common.MethodChannel.Result;
 
 public class AppLinkingViewModel {
     private static final String TAG = AppLinkingViewModel.class.getSimpleName();
 
-    private MethodCall call;
-    private Result result;
+    private ReplyHandler replyHandler;
 
-    public void setCall(MethodCall call) {
-        this.call = call;
-    }
-
-    public void setResult(Result result) {
-        this.result = result;
+    public void setReplyHandler(ReplyHandler replyHandler) {
+        this.replyHandler = replyHandler;
     }
 
     public void buildShortAppLinking() {
         ShortAppLinking.LENGTH shortAppLinkingLength;
 
-        if (call.argument("shortAppLinkingLength") != null) {
-            shortAppLinkingLength = ShortAppLinking.LENGTH.valueOf(call.argument("shortAppLinkingLength"));
+        if (replyHandler.getCall().argument("shortAppLinkingLength") != null) {
+            shortAppLinkingLength = ShortAppLinking.LENGTH.valueOf(replyHandler.getCall().argument("shortAppLinkingLength"));
         } else {
             shortAppLinkingLength = LENGTH.SHORT;
         }
         createAppLinkingWithInfo().buildShortAppLinking(shortAppLinkingLength).addOnSuccessListener(shortAppLinking -> {
-            result.success(Utils.fromShortAppLinkingToMap(shortAppLinking));
+            replyHandler.success(Utils.fromShortAppLinkingToMap(shortAppLinking));
         }).addOnFailureListener(e -> {
             if (e instanceof AGCException) {
-                result.error("", ((AGCException) e).getErrMsg(), e.getLocalizedMessage());
+                replyHandler.error("", ((AGCException) e).getErrMsg(), e.getLocalizedMessage());
                 Log.e(TAG, e.getMessage());
             } else {
-                result.error("", e.getLocalizedMessage(), e.getMessage());
+                replyHandler.error("", e.getLocalizedMessage(), e.getMessage());
             }
         });
     }
 
     public void buildLongAppLinking() {
         final AppLinking appLinking = createAppLinkingWithInfo().buildAppLinking();
-        result.success(Utils.fromAppLinkingToMap(appLinking));
+        replyHandler.success(Utils.fromAppLinkingToMap(appLinking));
     }
 
     private AppLinking.SocialCardInfo createSocialCardInfo(Map<String, Object> map) {
@@ -166,6 +161,7 @@ public class AppLinkingViewModel {
     }
 
     private AppLinking.Builder createAppLinkingWithInfo() {
+        MethodCall call = replyHandler.getCall();
         final AppLinking.Builder builder = AppLinking.newBuilder();
 
         if (call.argument("deepLink") != null) {
@@ -204,7 +200,7 @@ public class AppLinkingViewModel {
     public void getAppLinking(Activity activity) {
         AGConnectAppLinking.getInstance().getAppLinking(activity).addOnSuccessListener(resolvedLinkData -> {
             try {
-                result.success(Utils.fromResolvedLinkDataToMap(resolvedLinkData));
+                replyHandler.success(Utils.fromResolvedLinkDataToMap(resolvedLinkData));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -212,7 +208,7 @@ public class AppLinkingViewModel {
             try {
                 e.printStackTrace();
                 Log.e("getAppLinking", "错误了${e.localizedMessage}");
-                result.success(new HashMap<String, Object>());
+                replyHandler.success(new HashMap<String, Object>());
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

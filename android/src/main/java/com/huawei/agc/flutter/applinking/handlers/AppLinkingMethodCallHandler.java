@@ -21,6 +21,7 @@ import android.app.Activity;
 import androidx.annotation.NonNull;
 
 import com.huawei.agc.flutter.applinking.constants.Method;
+import com.huawei.agc.flutter.applinking.utils.ReplyHandler;
 import com.huawei.agc.flutter.applinking.viewModel.AppLinkingViewModel;
 import com.huawei.agconnect.AGConnectInstance;
 
@@ -42,8 +43,7 @@ public class AppLinkingMethodCallHandler implements MethodCallHandler {
         if (AGConnectInstance.getInstance() == null) {
             AGConnectInstance.initialize(activity.getApplicationContext());
         }
-        appLinkingViewModel.setCall(call);
-        appLinkingViewModel.setResult(result);
+        appLinkingViewModel.setReplyHandler(new ReplyHandler(call,result));
         switch (call.method) {
             case Method.BUILD_APP_LINKING:
                 appLinkingViewModel.buildLongAppLinking();
