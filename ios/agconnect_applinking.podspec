@@ -3,7 +3,7 @@
 # Run `pod lib lint applinking.podspec' to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'agconnect_applinking_plus'
+  s.name             = 'agconnect_applinking'
   s.version          = '1.0.0'
   s.summary          = 'HUAWEI AGC App Linking Kit plugin for Flutter.'
   s.description      = <<-DESC

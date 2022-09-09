@@ -9,7 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  agconnect_applinking_plus:
+  agconnect_applinking:
     path: ../
 
   cupertino_icons: ^0.1.3
