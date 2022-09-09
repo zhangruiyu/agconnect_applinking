@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'agconnect_applinking_plus'
-  s.version          = '1.2.0+300'
+  s.version          = '1.0.0'
   s.summary          = 'HUAWEI AGC App Linking Kit plugin for Flutter.'
   s.description      = <<-DESC
  AGC App Linking Kit plugin for Flutter.This Kit allows you to create cross-platform links that can work
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.dependency 'AGConnectAppLinking' , '1.2.1.300'
+  s.dependency 'AGConnectAppLinking' , '1.7.1.300'
   s.platform = :ios, '9.0'
   s.static_framework = true
 
