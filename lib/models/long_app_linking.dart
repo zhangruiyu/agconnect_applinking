@@ -17,7 +17,7 @@
 import 'dart:convert';
 
 class LongAppLinking {
-  Uri longLink;
+  Uri? longLink;
 
   LongAppLinking({
     this.longLink,
@@ -30,8 +30,6 @@ class LongAppLinking {
   }
 
   factory LongAppLinking.fromMap(Map<dynamic, dynamic> map) {
-    if (map == null) return null;
-
     return LongAppLinking(
       longLink: map["longLink"] == null ? null : Uri.parse(map["longLink"]),
     );

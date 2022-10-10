@@ -16,12 +16,12 @@
 
 import 'dart:async';
 
-import 'package:agconnect_applinking_plus/agconnect_applinking.dart';
-import 'package:agconnect_applinking_plus/constants/app_linking.dart';
-import 'package:agconnect_applinking_plus/models/app_linking_parameters.dart';
-import 'package:agconnect_applinking_plus/models/long_app_linking.dart';
-import 'package:agconnect_applinking_plus/models/resolved_link_data.dart';
-import 'package:agconnect_applinking_plus/models/short_app_linking.dart';
+import 'package:agconnect_applinking/agconnect_applinking.dart';
+import 'package:agconnect_applinking/constants/app_linking.dart';
+import 'package:agconnect_applinking/models/app_linking_parameters.dart';
+import 'package:agconnect_applinking/models/long_app_linking.dart';
+import 'package:agconnect_applinking/models/resolved_link_data.dart';
+import 'package:agconnect_applinking/models/short_app_linking.dart';
 import 'package:agconnect_applinking_example/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final String _appTitle = 'HUAWEI AGC AppLinking';
   final AGCAppLinking agcAppLinking = new AGCAppLinking();
-  StreamSubscription<ResolvedLinkData> _streamSubscription;
+  StreamSubscription<ResolvedLinkData>? _streamSubscription;
 
   void _showDialog(BuildContext context, String content) {
     showDialog(
@@ -112,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
   initState() {
     super.initState();
 
-    _streamSubscription = agcAppLinking.onResolvedData.listen((event) {
+    _streamSubscription = agcAppLinking.onResolvedData!.listen((event) {
       _showDialog(context, event.toString());
     });
   }

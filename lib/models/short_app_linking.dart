@@ -17,8 +17,8 @@
 import 'dart:convert';
 
 class ShortAppLinking {
-  Uri shortLink;
-  Uri testUrl;
+  Uri? shortLink;
+  Uri? testUrl;
 
   ShortAppLinking({
     this.shortLink,
@@ -33,8 +33,6 @@ class ShortAppLinking {
   }
 
   factory ShortAppLinking.fromMap(Map<dynamic, dynamic> map) {
-    if (map == null) return null;
-
     return ShortAppLinking(
       shortLink: map["shortLink"] == null ? null : Uri.parse(map["shortLink"]),
       testUrl: map["testUrl"] == null ? null : Uri.parse(map["testUrl"]),

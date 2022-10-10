@@ -28,7 +28,7 @@ class AGCAppLinking {
   static const EventChannel _eventChannel =
       const EventChannel("com.huawei.agc.flutter.applinking_eventchannel");
 
-  Stream<ResolvedLinkData> _onResolvedLinkData;
+  Stream<ResolvedLinkData>? _onResolvedLinkData;
 
   Future<ShortAppLinking> buildShortAppLinking(
       ApplinkingInfo applinkingInfo) async {
@@ -45,12 +45,16 @@ class AGCAppLinking {
     return appLinking;
   }
 
-  Future<dynamic> getAppLinking() async {
-    return ResolvedLinkData.fromMap(
-        (await _channel.invokeMapMethod<String, dynamic>("getAppLinking")));
+  Future<ResolvedLinkData?> getAppLinking() async {
+    Map<String, dynamic>? result =
+        await _channel.invokeMapMethod<String, dynamic>("getAppLinking");
+    if (result == null) {
+      return null;
+    }
+    return ResolvedLinkData.fromMap(result);
   }
 
-  Stream<ResolvedLinkData> get onResolvedData {
+  Stream<ResolvedLinkData>? get onResolvedData {
     if (_onResolvedLinkData == null) {
       _onResolvedLinkData = _eventChannel
           .receiveBroadcastStream()

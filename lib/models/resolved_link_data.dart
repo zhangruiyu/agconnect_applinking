@@ -16,14 +16,14 @@
 import 'dart:convert';
 
 class ResolvedLinkData {
-  int clickTimestamp;
-  Uri deepLink;
-  String socialTitle;
-  String socialDescription;
-  String socialImageUrl;
-  String campaignName;
-  String campaignMedium;
-  String campaignSource;
+  int? clickTimestamp;
+  Uri? deepLink;
+  String? socialTitle;
+  String? socialDescription;
+  String? socialImageUrl;
+  String? campaignName;
+  String? campaignMedium;
+  String? campaignSource;
 
   ResolvedLinkData(
       {this.clickTimestamp = 0,
@@ -49,8 +49,6 @@ class ResolvedLinkData {
   }
 
   factory ResolvedLinkData.fromMap(Map<dynamic, dynamic> map) {
-    if (map == null) return null;
-
     return ResolvedLinkData(
       clickTimestamp:
           map["clickTimestamp"] == null ? null : map["clickTimestamp"],

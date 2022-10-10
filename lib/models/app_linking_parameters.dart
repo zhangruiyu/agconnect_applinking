@@ -17,17 +17,17 @@
 import 'package:flutter/cupertino.dart';
 
 class ApplinkingInfo {
-  final SocialCardInfo socialCardInfo;
-  final CampaignInfo campaignInfo;
-  final AndroidLinkInfo androidLinkInfo;
-  final iOSLinkInfo iosLinkInfo;
-  final iTunesLinkInfo itunesLinkInfo;
-  final String domainUriPrefix;
-  final String deepLink;
-  final String longLink;
-  final String shortAppLinkingLength;
-  final String previewType;
-  final int expireMinute;
+  final SocialCardInfo? socialCardInfo;
+  final CampaignInfo? campaignInfo;
+  final AndroidLinkInfo? androidLinkInfo;
+  final iOSLinkInfo? iosLinkInfo;
+  final iTunesLinkInfo? itunesLinkInfo;
+  final String? domainUriPrefix;
+  final String? deepLink;
+  final String? longLink;
+  final String? shortAppLinkingLength;
+  final String? previewType;
+  final int? expireMinute;
 
   ApplinkingInfo(
       {this.socialCardInfo,
@@ -60,11 +60,11 @@ class ApplinkingInfo {
 }
 
 class iTunesLinkInfo {
-  final String iTunesConnectMediaType;
-  final String iTunesConnectAffiliateToken;
+  final String? iTunesConnectMediaType;
+  final String? iTunesConnectAffiliateToken;
 
-  final String iTunesConnectProviderToken;
-  final String iTunesConnectCampaignToken;
+  final String? iTunesConnectProviderToken;
+  final String? iTunesConnectCampaignToken;
 
   iTunesLinkInfo(
       {this.iTunesConnectMediaType,
@@ -83,12 +83,12 @@ class iTunesLinkInfo {
 }
 
 class iOSLinkInfo {
-  final String iosFallbackUrl;
-  final String iosBundleId;
+  final String? iosFallbackUrl;
+  final String? iosBundleId;
 
-  final String iosDeepLink;
-  final String ipadBundleId;
-  final String ipadFallbackUrl;
+  final String? iosDeepLink;
+  final String? ipadBundleId;
+  final String? ipadFallbackUrl;
 
   iOSLinkInfo(
       {this.iosFallbackUrl,
@@ -109,10 +109,10 @@ class iOSLinkInfo {
 }
 
 class AndroidLinkInfo {
-  final String androidFallbackUrl;
-  final String androidPackageName;
-  final String androidOpenType;
-  final String androidDeepLink;
+  final String? androidFallbackUrl;
+  final String? androidPackageName;
+  final String? androidOpenType;
+  final String? androidDeepLink;
 
   AndroidLinkInfo(
       {this.androidFallbackUrl,
@@ -131,9 +131,9 @@ class AndroidLinkInfo {
 }
 
 class CampaignInfo {
-  final String medium;
-  final String name;
-  final String source;
+  final String? medium;
+  final String? name;
+  final String? source;
 
   CampaignInfo({this.medium, this.name, this.source});
 
@@ -143,9 +143,9 @@ class CampaignInfo {
 }
 
 class SocialCardInfo {
-  final String description;
-  final String imageUrl;
-  final String title;
+  final String? description;
+  final String? imageUrl;
+  final String? title;
 
   SocialCardInfo({this.description, this.imageUrl, this.title});
 
